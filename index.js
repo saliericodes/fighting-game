@@ -58,6 +58,21 @@ const enemy = new Sprite({
     }
 })
 
+const keys = {
+    w: {
+        pressed: false
+    },
+    a: {
+        pressed: false
+    },
+    s: {
+        pressed: false
+    },
+    d: {
+        pressed: false
+    }
+}
+let lastKey
 
 function animate() {
     window.requestAnimationFrame(animate);
@@ -66,7 +81,16 @@ function animate() {
     player.update();
     enemy.update();
 
+    player.velocity.x = 0;
+    if (keys.a.pressed && lastKey === 'a') {
+        player.velocity.x = -1;
+    }
+    else if (keys.d.pressed && lastKey === 'd') {
+        player.velocity.x = 1;
+    }
 }
+
+
 
 animate();
 
@@ -76,13 +100,15 @@ window.addEventListener('keydown', (e) => {
             player.velocity.y = -1;
             break;
         case 'a':
-            player.velocity.x = -1;
+            keys.a.pressed = true;
+            lastKey = 'a';
             break;
         case 's':
             player.velocity.y = 1;
             break;
         case 'd':
-            player.velocity.x = 1;
+            keys.d.pressed = true;
+            lastKey = 'd';
             break;
     }
 })
@@ -94,13 +120,13 @@ window.addEventListener('keyup', (e) => {
             player.velocity.y = 0;
             break;
         case 'a':
-            player.velocity.x = 0;
+            keys.a.pressed = false;
             break;
         case 's':
             player.velocity.y = 0;
             break;
         case 'd':
-            player.velocity.x = 0;
+            keys.d.pressed = false;
             break;
     }
 })

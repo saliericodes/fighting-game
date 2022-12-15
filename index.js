@@ -16,6 +16,11 @@ class Sprite {
         ctx.fillStyle = 'red';
         ctx.fillRect(this.position.x, this.position.y, 50, 150);
     }
+
+    update() {
+        this.draw();
+        this.position.y += 10;
+    }
 }
 
 const player = new Sprite({
@@ -29,7 +34,7 @@ const player = new Sprite({
     }
 })
 
-player.draw();
+
 
 const enemy = new Sprite({
     position: {
@@ -41,10 +46,12 @@ const enemy = new Sprite({
         y: 0
     }
 })
-enemy.draw();
+
 
 function animate() {
     window.requestAnimationFrame(animate);
+    player.update();
+    enemy.update();
 
 }
 

@@ -21,6 +21,8 @@ class Sprite {
 
     update() {
         this.draw();
+
+        this.position.x += this.velocity.x;
         this.position.y += this.velocity.y;
 
         if (this.position.y + this.height + this.velocity.y >= canvas.height) {
@@ -67,3 +69,39 @@ function animate() {
 }
 
 animate();
+
+window.addEventListener('keydown', (e) => {
+    switch (e.key) {
+        case 'w':
+            player.velocity.y = -1;
+            break;
+        case 'a':
+            player.velocity.x = -1;
+            break;
+        case 's':
+            player.velocity.y = 1;
+            break;
+        case 'd':
+            player.velocity.x = 1;
+            break;
+    }
+})
+
+window.addEventListener('keyup', (e) => {
+
+    switch (e.key) {
+        case 'w':
+            player.velocity.y = 0;
+            break;
+        case 'a':
+            player.velocity.x = 0;
+            break;
+        case 's':
+            player.velocity.y = 0;
+            break;
+        case 'd':
+            player.velocity.x = 0;
+            break;
+    }
+})
+

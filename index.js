@@ -11,6 +11,7 @@ class Sprite {
     constructor({ position, velocity, color = 'red' }) {
         this.position = position;
         this.velocity = velocity;
+        this.width = 50;
         this.height = 150;
         this.lastKey
         this.attackBox = {
@@ -24,7 +25,7 @@ class Sprite {
 
     draw() {
         ctx.fillStyle = this.color;
-        ctx.fillRect(this.position.x, this.position.y, 50, 150);
+        ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         //attack box
         ctx.fillStyle = 'blue';
@@ -122,6 +123,15 @@ function animate() {
     else if (keys.ArrowRight.pressed && enemy.lastKey === 'ArrowRight') {
         enemy.velocity.x = 5;
     }
+
+    //detect collision
+    if
+        (player.position.x + player.attackBox.width >= enemy.position.x &&
+        player.position.x <= enemy.position.x + enemy.width &&
+        player.position.y + player.attackBox.height >= enemy.position.y &&
+        player.position.y <= enemy.position.y + enemy.height) {
+        console.log('hit');
+    }
 }
 
 
@@ -179,4 +189,3 @@ window.addEventListener('keyup', (e) => {
             break;
     }
 })
-

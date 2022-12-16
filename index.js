@@ -166,6 +166,7 @@ function animate() {
     }) &&
         player.isAttacking) {
         player.isAttacking = false;
+        document.querySelector('#enemyHealth').style.width = '20%'
         console.log('hit');
     }
     if (rectangularCollision({
@@ -213,6 +214,9 @@ window.addEventListener('keydown', (e) => {
             break;
         case 'm':
             enemy.isAttacking = true;
+            setTimeout(() => {
+                enemy.isAttacking = false;
+            }, 100);
             break;
 
     }

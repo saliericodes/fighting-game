@@ -214,6 +214,9 @@ window.addEventListener('keydown', (e) => {
             break;
         case 'm':
             enemy.isAttacking = true;
+            setTimeout(() => {
+                enemy.isAttacking = false;
+            }, 100);
             break;
 
     }

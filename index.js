@@ -33,15 +33,15 @@ class Sprite {
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
         //attack box
-        /*    if (this.isAttacking) { */
-        ctx.fillStyle = 'blue';
-        ctx.fillRect(
-            this.attackBox.position.x,
-            this.attackBox.position.y,
-            this.attackBox.width,
-            this.attackBox.height
-        );
-        /* } */
+        if (this.isAttacking) {
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(
+                this.attackBox.position.x,
+                this.attackBox.position.y,
+                this.attackBox.width,
+                this.attackBox.height
+            );
+        }
     }
 
     update() {
@@ -168,7 +168,7 @@ function animate() {
         player.isAttacking = false;
         console.log('hit');
     }
-    else if (rectangularCollision({
+    if (rectangularCollision({
         rectangular1: enemy,
         rectangular2: player
     }) &&

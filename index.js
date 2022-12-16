@@ -166,6 +166,7 @@ function animate() {
     }) &&
         player.isAttacking) {
         player.isAttacking = false;
+        document.querySelector('#enemyHealth').style.width = '20%'
         console.log('hit');
     }
     if (rectangularCollision({

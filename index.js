@@ -29,6 +29,8 @@ class Sprite {
 
     }
 
+
+
     draw() {
         ctx.fillStyle = this.color;
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
@@ -134,28 +136,31 @@ function rectangularCollision({ rectangular1, rectangular2 }) {
     );
 }
 
-let timer = 4;
+function determineWinner({ player, enemy, timerId }) {
+    clearTimeout(timerId);
+    document.querySelector('#displayText').style.display = 'flex';
+    if (player.health === enemy.health) {
+        document.querySelector('#displayText').innerHTML = 'Draw';
+    }
+    else if (player.health > enemy.health) {
+        document.querySelector('#displayText').innerHTML = 'Player 1 Wins';
+    }
+    else {
+        document.querySelector('#displayText').innerHTML = 'Player 2 Wins';
+    }
+}
+
+let timer = 60;
+let timerId
 function decreaseTimer() {
     if (timer > 0) {
-        setTimeout(decreaseTimer, 1000);
+        timerId = setTimeout(decreaseTimer, 1000);
         timer--;
         document.querySelector('#timer').innerHTML = timer;
     }
 
     if (timer === 0) {
-        if (player.health === enemy.health) {
-            document.querySelector('#displayText').innerHTML = 'Draw';
-            document.querySelector('#displayText').style.display = 'flex';
-
-        }
-        else if (player.health > enemy.health) {
-            document.querySelector('#displayText').innerHTML = 'Player 1 Wins';
-            document.querySelector('#displayText').style.display = 'flex';
-        }
-        else {
-            document.querySelector('#displayText').innerHTML = 'Player 2 Wins';
-            document.querySelector('#displayText').style.display = 'flex';
-        }
+        determineWinner({ player, enemy });
     }
 
 }
@@ -209,10 +214,13 @@ function animate() {
         document.querySelector('#playerHealth').style.width = player.health + '%';
         console.log('enemy hit');
     }
+
+    //end game
+    if (player.health <= 0 || enemy.health <= 0) {
+        determineWinner({ player, enemy, timerId });
+    }
+
 }
-
-
-
 
 
 animate();

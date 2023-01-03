@@ -134,14 +134,30 @@ function rectangularCollision({ rectangular1, rectangular2 }) {
     );
 }
 
-let timer = 10;
+let timer = 4;
 function decreaseTimer() {
-    setTimeout(decreaseTimer, 1000);
-
     if (timer > 0) {
+        setTimeout(decreaseTimer, 1000);
         timer--;
         document.querySelector('#timer').innerHTML = timer;
     }
+
+    if (timer === 0) {
+        if (player.health === enemy.health) {
+            document.querySelector('#displayText').innerHTML = 'Draw';
+            document.querySelector('#displayText').style.display = 'flex';
+
+        }
+        else if (player.health > enemy.health) {
+            document.querySelector('#displayText').innerHTML = 'Player 1 Wins';
+            document.querySelector('#displayText').style.display = 'flex';
+        }
+        else {
+            document.querySelector('#displayText').innerHTML = 'Player 2 Wins';
+            document.querySelector('#displayText').style.display = 'flex';
+        }
+    }
+
 }
 
 decreaseTimer();

@@ -25,6 +25,7 @@ class Sprite {
         }
         this.color = color;
         this.isAttacking
+        this.health = 100;
 
     }
 
@@ -166,7 +167,8 @@ function animate() {
     }) &&
         player.isAttacking) {
         player.isAttacking = false;
-        document.querySelector('#enemyHealth').style.width = '20%'
+        enemy.health -= 20;
+        document.querySelector('#enemyHealth').style.width = enemy.health + '%';
         console.log('hit');
     }
     if (rectangularCollision({
@@ -175,6 +177,8 @@ function animate() {
     }) &&
         enemy.isAttacking) {
         enemy.isAttacking = false;
+        player.health -= 20;
+        document.querySelector('#playerHealth').style.width = player.health + '%';
         console.log('enemy hit');
     }
 }

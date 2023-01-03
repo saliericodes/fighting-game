@@ -14,6 +14,20 @@ const background = new Sprite({
         y: 0
     },
     imageSrc: './assets/Background.png',
+    width: 1024,
+    height: 512
+
+
+})
+
+const shop = new Sprite({
+    position: {
+        x: 630,
+        y: 135
+    },
+    imageSrc: './assets/shop.png',
+    scale: 2.7,
+
 
 
 })
@@ -78,7 +92,8 @@ function animate() {
     window.requestAnimationFrame(animate);
     ctx.fillStyle = 'black'
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    background.draw();
+    background.update();
+    shop.update();
     player.update();
     enemy.update();
 
